@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>石头剪刀布</title>
+  </head>
+  <style>
+    body {
+      background-color: rgb(255, 255, 0);
+      text-align: center;
+    }
+    h2 {
+      margin-top: 5%;
+      text-align: center;
+      visibility: hidden;
+    }
+    .flex {
+      margin-top: 10%;
+      display: flex;
+      text-align: center;
+      justify-content: space-around;
+    }
+    img {
+      width: 96px;
+      height: 96px;
+      display: block;
+    }
+  </style>
+  <body>
+    <!-- ----------- -->
+    <h2 id="title">第一回合（共三回合）</h2>
+
+    <!-- ----------- -->
+    <div class="flex">
+      <div class="p3">
+        <img id="img1" src="./wenhao.png" alt="?" />
+        <p>机器人</p>
+        <div class="flex">
+          <p>胜:&nbsp;<span id="span1">0</span></p>
+          <p>|</p>
+          <p>负:&nbsp;<span id="span2">0</span></p>
+        </div>
+      </div>
+      <div class="p3">
+        <img id="img2" src="./wenhao.png" alt="?" />
+        <p>Hold</p>
+        <div class="flex">
+          <p>胜:&nbsp;<span id="span3">0</span></p>
+          <p>|</p>
+          <p>负:&nbsp;<span id="span4">0</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ----------- -->
+    <p id="res"></p>
+    <dialog id="dialog">
+      <form id="form" method="dialog">
+        <p>
+          <label for="gesture"> 请选择要出的手势： </label>
+          <select id="select">
+            <option value="0">石头</option>
+            <option value="1">剪刀</option>
+            <option value="2">布</option>
+          </select>
+        </p>
+        <p>
+          <button type="" onclick="toplay()">确定</button>
+        </p>
+      </form>
+    </dialog>
+    <!-- ----------- -->
+    <button id="but" onclick="showdialog()">开始下一回合</button>
+
+    <!-- ----------- -->
+    <h3 id="res2"></h3>
+  </body>
+  <script>
+    let p0 = 0; //回合数
+    let p4 = 0; //胜利分数 只用记一个人分数
+    let p5 = 0; //负分数
+    // 点击下一回合
+    function showdialog() {
+      let flag = document.getElementById("dialog");
+      flag.show();
+    }
+    //点击确定
+    function toplay() {
+      p0++;
+      document.getElementById("title").style.visibility = "visible";
+      document.getElementById("title").innerText = `第${p0}回合（共三回合）`;
+      let p1 = Math.round(Math.random() * 2);
+      let p2 = document.getElementById("select").value;
+      document.getElementById("img1").setAttribute("src", `./${p1}.png`);
+      document.getElementById("img2").setAttribute("src", `./${p2}.png`);
+      document.getElementById("img1").style.transform = "rotate(45deg)";
+      document.getElementById("img2").style.transform = "rotate(45deg)";
+      if (p1 === p2) {
+        document.getElementById("res").innerText = "本回合平局";
+      } else if (
+        (p1 == 0 && p2 == 1) ||
+        (p1 == 1 && p2 == 2) ||
+        (p1 == 2 && p2 == 0)
+      ) {
+        document.getElementById("res").innerText = "本回合机器人赢";
+        p4++;
+      } else {
+        document.getElementById("res").innerText = "本回合你赢";
+        p5++;
+      }
+      isp();
+      if (p0 == 2) {
+        if (p4 == 2) {
+          document.getElementById("but").style.visibility = "hidden";
+          document.getElementById("res2").innerText =
+            "(≧v≦)o~~好棒，恭喜机器人获得胜利！";
+        } else if (p5 == 2) {
+          document.getElementById("but").style.visibility = "hidden";
+          document.getElementById("res2").innerText =
+            "(≧v≦)o~~好棒，恭喜hold获得胜利！";
+        }
+      }
+      if (p0 == 2) {
+        if (p4 == p5) {
+          document.getElementById("but").style.visibility = "hidden";
+          document.getElementById("res2").innerText = "不错，平局";
+        }
+      }
+    }
+    // 判断计分器函数
+    function isp() {
+      document.getElementById("span1").innerText = p4;
+      document.getElementById("span2").innerText = p5;
+      document.getElementById("span3").innerText = p5;
+      document.getElementById("span4").innerText = p4;
+    }
+  </script>
+</html>
