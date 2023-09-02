@@ -126,6 +126,13 @@
         if (p4 == p5) {
           document.getElementById("res2").innerText = "不错，平局";
         }
+        if (p4 * 1 > p5 * 1) {
+          document.getElementById("res2").innerText =
+            "(≧v≦)o~~好棒，恭喜机器人获得胜利！";
+        } else if (p4 * 1 < p5 * 1) {
+          document.getElementById("res2").innerText =
+            "(≧v≦)o~~好棒，恭喜hold获得胜利！";
+        }
       }
     }
     // 判断计分器函数
