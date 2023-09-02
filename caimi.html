@@ -111,16 +111,15 @@
         p5++;
       }
       isp();
-      if (p0 == 2) {
-        if (p4 == 2) {
-          document.getElementById("but").style.visibility = "hidden";
-          document.getElementById("res2").innerText =
-            "(≧v≦)o~~好棒，恭喜机器人获得胜利！";
-        } else if (p5 == 2) {
-          document.getElementById("but").style.visibility = "hidden";
-          document.getElementById("res2").innerText =
-            "(≧v≦)o~~好棒，恭喜hold获得胜利！";
-        }
+
+      if (p4 == 2) {
+        document.getElementById("but").style.visibility = "hidden";
+        document.getElementById("res2").innerText =
+          "(≧v≦)o~~好棒，恭喜机器人获得胜利！";
+      } else if (p5 == 2) {
+        document.getElementById("but").style.visibility = "hidden";
+        document.getElementById("res2").innerText =
+          "(≧v≦)o~~好棒，恭喜hold获得胜利！";
       }
       if (p0 == 3) {
         if (p4 == p5) {
