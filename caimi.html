@@ -91,7 +91,8 @@
       document.getElementById("title").style.visibility = "visible";
       document.getElementById("title").innerText = `第${p0}回合（共三回合）`;
       let p1 = Math.round(Math.random() * 2);
-      let p2 = document.getElementById("select").value;
+      let p2 = document.getElementById("select").value * 1;
+      console.log(p1, p2);
       document.getElementById("img1").setAttribute("src", `./${p1}.png`);
       document.getElementById("img2").setAttribute("src", `./${p2}.png`);
       document.getElementById("img1").style.transform = "rotate(45deg)";
