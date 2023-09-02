@@ -71,8 +71,12 @@
       </form>
     </dialog>
     <!-- ----------- -->
+    <p>
+      <label for="gesture"> 请输入回合数： </label>
+      <input type="number" onblur="chekp()" id="inp" />
+    </p>
     <button id="but" onclick="showdialog()">开始下一回合</button>
-
+    <button id="but" onclick="cz()">重新开始</button>
     <!-- ----------- -->
     <h3 id="res2"></h3>
   </body>
@@ -80,6 +84,7 @@
     let p0 = 0; //回合数
     let p4 = 0; //胜利分数 只用记一个人分数
     let p5 = 0; //负分数
+    let p6 = 3; //总回合数,默认三
     // 点击下一回合
     function showdialog() {
       let flag = document.getElementById("dialog");
@@ -89,7 +94,7 @@
     function toplay() {
       p0++;
       document.getElementById("title").style.visibility = "visible";
-      document.getElementById("title").innerText = `第${p0}回合（共三回合）`;
+      document.getElementById("title").innerText = `第${p0}回合（共${p6}回合）`;
       let p1 = Math.round(Math.random() * 2);
       let p2 = document.getElementById("select").value * 1;
       console.log(p1, p2);
@@ -112,16 +117,16 @@
       }
       isp();
 
-      if (p4 == 2) {
+      if (p4 == Math.ceil(p6 / 2)) {
         document.getElementById("but").style.visibility = "hidden";
         document.getElementById("res2").innerText =
           "(≧v≦)o~~好棒，恭喜机器人获得胜利！";
-      } else if (p5 == 2) {
+      } else if (p5 == Math.ceil(p6 / 2)) {
         document.getElementById("but").style.visibility = "hidden";
         document.getElementById("res2").innerText =
           "(≧v≦)o~~好棒，恭喜hold获得胜利！";
       }
-      if (p0 == 3) {
+      if (p0 == p6) {
         document.getElementById("but").style.visibility = "hidden";
         if (p4 == p5) {
           document.getElementById("res2").innerText = "不错，平局";
@@ -141,6 +146,30 @@
       document.getElementById("span2").innerText = p5;
       document.getElementById("span3").innerText = p5;
       document.getElementById("span4").innerText = p4;
+    }
+    //重置
+    function cz() {
+      p0 = 0; //回合数
+      p4 = 0; //胜利分数 只用记一个人分数
+      p5 = 0; //负分数
+      document.getElementById("title").style.visibility = "hidden";
+      document.getElementById("res").innerText = "";
+      document.getElementById("res2").innerText = "";
+      document.getElementById("span1").innerText = 0;
+      document.getElementById("span2").innerText = 0;
+      document.getElementById("span3").innerText = 0;
+      document.getElementById("span4").innerText = 0;
+      document.getElementById("img1").setAttribute("src", `./wenhao.png`);
+      document.getElementById("img2").setAttribute("src", `./wenhao.png`);
+      document.getElementById("img1").style.transform = "rotate(0)";
+      document.getElementById("img2").style.transform = "rotate(0)";
+      document.getElementById("inp").value = "";
+      p6 = 3;
+    }
+    //设置回合数
+    function chekp() {
+      p6 = document.getElementById("inp").value || 3;
+      document.getElementById("title").innerText = `第${p0}回合（共${p6}回合）`;
     }
   </script>
 </html>
